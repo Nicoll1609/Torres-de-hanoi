@@ -1,0 +1,241 @@
+#include <iostream>
+#include <stdlib.h>
+#include<stdio.h>
+using namespace std;
+
+int tem, tem2, discos, i, j, desde, hacia, con, tam, tamdisco, espacios, k, matriz[100][6],torres, seguir;
+char cr=':', si, fondo = 205; // llama al fondo , si se busca codigo ASCII puede cambiarse 
+
+void moverdisco() // FUNCION PARA MOVER DISCOS CON 3 TORRES EN LA VERSION PARA JUGAR YA FUE EXLPLICADA 
+{
+	while(matriz[0][1]!=1&& matriz[0][2]!=1)
+	{
+		cout <<"\n\n\t\t\t Numero de movimientos realizados: "<<con++<<" \n\n";
+		do{
+			cout <<"En que torre se encuentra el disco que desea mover: ";
+			cin >> desde;
+			if(matriz[discos-1][desde-1]==0){ 
+			cout <<"No hay disco en esa torre" <<endl;
+			}
+			
+		}
+		while(matriz[discos-1][desde-1]==0);
+		cout <<"En que torre desea colocar el disco:  ";
+		cin >> hacia;
+		desde--;
+		hacia--;
+		for(i=0; i<discos; i++)
+		{
+			if(matriz[i][desde]!=0)
+			{
+				tem=matriz[i][desde];
+				tem2=i;
+				i=discos;
+				
+			}
+		}
+		for(i=discos-1; i>=0; i--)
+		{
+			if(matriz[i][hacia]==0)
+			{
+				if(matriz[i+1][hacia]>tem || i == (discos-1))
+				{
+					matriz[i][hacia]=tem;
+					matriz[tem2][desde]=0;
+					
+				}
+				else
+				{
+					cout<<"\n\n Error: No puedes colocar un disco de mayor tamaño encima de uno de menor tamaño \n Ni dejar el disco en la misma torre" <<endl
+					<<"Cambie sus elecciones"<< endl;
+					con--;
+					moverdisco();
+					
+				}
+				i=0;
+			}
+		}
+		system("cls");
+		for(i=1; i<=((tam*3)+3)+1; i++)
+		    cout <<fondo;
+		cout <<endl<<fondo;
+		for(i=0; i<discos; i++)
+		{
+			for(j=0; j<3; j++)
+			{
+			
+			for(k=1; k<=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k > (tam-espacios))
+					cout << fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+		}	
+		cout <<endl<<fondo;
+		
+	}
+	for(i=1; i<=((tam*3)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else 
+		cout <<fondo;
+		
+	}
+	cout<<endl;
+	for(i=1; i<=((tam*3)+4); i++)
+	cout <<fondo;
+}
+/*system("color f1");*/
+system("color 71") ;
+cout <<"\n\n Resolvio el juego en " << con << " movimientos \n\n ";
+
+getchar();
+
+
+
+}
+
+int main() {
+	
+	system ("color E5"); //CAMBIA EL COLOR DE LA INTERFAZ
+	cout << " Manual de usuario "<<endl; //MUESTRA ESTOS MENSAJES
+	cout << " Para jugar las torres de Hanoi debes seguir las siguientes reglas "<<endl;
+	cout << " 1. Cada vez que se ejecuta una jugada o movimiento este sólo puede ser sobre un disco. "<<endl;
+	cout << " Para 3 discos y 3 torres "<<endl;
+	
+	// CORRE EL PROGRAMA PARA TRES DISCOS Y TRES TORRES
+	discos=3;
+	tam=discos+(discos-1);
+	for(i=1; i<=((tam*3)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<3; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*3)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else
+		cout <<fondo;
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*3)+4); i++)
+	cout <<fondo;
+	moverdisco();
+	
+	cout << " Desea seguir a las siguientes reglas?: Si: 1 /No: 2 "<<endl; // PREGUNTA AL USUARIO SI DESEA SEGUIR A LA REGLA 2 y 3
+	
+	cin>> seguir;
+	
+if (seguir==1 || seguir==1 ){
+	
+	
+	system("cls");
+	system("color E5");
+	cout << " 2. Un disco más pequeño no puede ser colocado debajo de los discos más grandes. "<<endl;
+	cout << " 3. Todos los discos, excepto el que se está moviendo, deben estar en un poste. "<<endl;
+	cout << " Para 3 discos y 3 torres "<<endl;
+	
+	// corre de nuevo el juego para que el usuario evidencie la regla 2 y 3 
+	discos=3; // llena la matriz de la interfaz que ve el usuario
+	tam=discos+(discos-1);
+	for(i=1; i<=((tam*3)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<3; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o"; // indicación para los dicos
+				}
+			}
+			cout <<fondo;// lo demas lo llena con el fondo
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*3)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else
+		cout <<fondo;
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*3)+4); i++)
+	cout <<fondo;
+	con=0;
+	moverdisco();
+}
+else 
+system("PAUSE"); // se sale del programa en caso que el usuario no quiera ver las siguientes reglas. 
+
+
+
+}
