@@ -1,0 +1,148 @@
+#include <conio.h>
+#include <stdio.h> 
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+int si;
+void torres_hanoit(int hanoit,int uno,int tres,int dos) // FUNCION QUE BUSCA LA SOLUCION CON TRES TORRES USANDO RECURSIVIDAD 
+{
+
+        // SI EL DISCO ES 1 
+ if(hanoit==1){  
+
+cout<<"Disco "<<hanoit<<": De la torre  "<<uno<<" a la torre "<<tres<<endl;
+
+getch();  
+
+ } 
+
+else{   // SINO ENTRA A COLOCAR LAS INSTRUCCIONES CUANDO EL NUMERO DE DISCO SEA DIFERENTE DE 1 
+
+ torres_hanoit(hanoit-1,uno,dos,tres); 
+ 
+cout<<"Disco "<<hanoit<<": De la torre  "<<uno<<" a la torre "<<tres<<endl; // 
+
+getch(); 
+
+ torres_hanoit(hanoit-1,dos,tres,uno); // SE CAMBIAN LOS PARAMETROS DE LA FUNCION PARA EL NUEVO INICIO 
+
+}
+
+} 
+
+
+
+void torres_foca(int foca,int uno,int cuatro,int dos,int tres )  // FUNCION QUE BUSCA LA SOLUCION CON 4 TORRES USANDO RECURSIVIDAD
+{
+
+if (foca == 0) 
+        return; 
+        
+ if(foca==1){  
+
+cout<<"Disco "<<foca<<": De la torre  "<<uno<<" a la torre "<<cuatro<<endl;
+
+getch();  
+
+ } 
+
+else{   
+
+ torres_foca(foca-2,uno,dos,tres,cuatro); 
+
+cout<<"Disco "<<foca-1<<": De la torre  "<<uno<<" a la torre "<<tres<<endl; 
+cout<<"Disco "<<foca<<": De la torre  "<<uno<<" a la torre "<<cuatro<<endl;  
+cout<<"Disco "<<foca-1<<": De la torre  "<<tres<<" a la torre "<<cuatro<<endl; 
+
+getch(); 
+
+ torres_foca(foca-2,dos,cuatro,uno,tres); 
+
+}
+
+} 
+
+
+void torres_hanoic(int hanoic,int uno,int cinco,int dos,int tres, int cuatro ) // FUNCION QUE BUSCA LA SOLUCION CON 5 TORRES USANDO RECURSIVIDAD
+{
+
+if (hanoic == 0) 
+        return; 
+        
+ if(hanoic==1){  
+
+cout<<"Disco "<<hanoic<<": De la torre  "<<uno<<" a la torre "<<cinco<<endl;
+
+getch();  
+
+ } 
+
+else{ 
+  
+
+ torres_hanoic(hanoic-3,uno,dos,tres,cuatro,cinco); 
+
+        
+cout<<"Disco "<<hanoic-2<<": De la torre  "<<uno<<" a la torre "<<tres<<endl; 
+cout<<"Disco "<<hanoic-1<<": De la torre  "<<uno<<" a la torre "<<cuatro<<endl; 
+cout<<"Disco "<<hanoic<<": De la torre  "<<uno<<" a la torre "<<cinco<<endl;  
+cout<<"Disco "<<hanoic-1<<": De la torre  "<<cuatro<<" a la torre "<<cinco<<endl; 
+cout<<"Disco "<<hanoic-2<<": De la torre  "<<tres<<" a la torre "<<cinco<<endl; 
+
+getch(); 
+
+ torres_hanoic(hanoic-3,dos,cinco,cuatro,tres,uno); 
+ 
+}
+
+} 
+
+
+
+main(){ 
+
+system ("color E5"); // CAMBIA EL COLOR
+int discos; 
+int torres;
+
+cout<<"Juego de las torres de Hanoi\n\n"<<endl; 
+
+
+cout<<"Ingresa el numero de discos : \n\n\t";
+
+ cin>>discos; // GUARDA EL NUMERO DE DISCOS
+ 
+ cout<<"Ingresa el numero de torres : \n\n\t";
+
+ cin>>torres; // GUARDA EL NUMERO DE TORRES
+ 
+ switch (torres){ // ELIGE UN CASO DE ACUERDO AL NUMERO DE TORRES Y LLAMA A LA FUNCION QUE NECESITA EN ESE CASO
+ 	
+ 	case 3:
+ 		
+ 		torres_hanoit(discos,1,3,2);
+ 		
+ 	break; 
+ 	case 4:
+ 		
+ 		torres_foca(discos,1,4,2,3);
+ 		
+ 		break; 
+ 		
+ 	case 5:
+ 	
+ 	    torres_hanoic(discos,1,5,2,3,4);
+ 	
+ 	break;
+ }
+ system("color 71") ;
+ cout<<"Desea ver otra solucion: Escriba 1 (si) o 2 para (no):   "; // PREGUNTA AL USUARIO SI QUIERE SEGUIR CON OTRO CASO
+cin >> si;
+if(si==1)
+     main();
+else
+     system("PAUSE");
+ getch();
+  }
