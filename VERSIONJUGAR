@@ -1,0 +1,737 @@
+#include <iostream>
+#include <stdlib.h>
+#include<stdio.h>
+using namespace std;
+
+
+void moverdisco(); // esta funcion es para mover los discos cuando el usuario elige 3 torres
+void moverdiscocu(); // esta funcion es para mover los discos cuando el usuario elige 4 torres
+void moverdiscoci(); // esta funcion es para mover los discos cuando el usuario elige 5 torres
+void moverdiscose(); // esta funcion es para mover los discos cuando el usuario elige 6 torres
+
+int tem, tem2, discos, i, j, desde, hacia, con, tam, tamdisco, espacios, k, matriz[100][6],torres;
+char cr=':', si, fondo = 205;
+
+void linea(int j)
+{
+	for(int i=0; i<j; i++ )
+	cout <<cr;
+	cout <<endl;
+	
+}
+void salir()  // esta funcion aparece cuando el usuario digite que ya no jugarás mas 
+{
+	system("cls");
+	linea(27);
+	cout <<cr<<cr<<cr<<cr<<cr<<cr<<" GRACIAS "<<" ";
+	linea(6);
+	cout <<cr<<cr<<cr<<cr<<cr<<cr<<"POR JUGAR"<<" ";
+	linea(10);
+	linea(27);
+	cout <<cr<<"Proyecto final Sistemas Electronicos"<<cr<<endl;
+	cout <<cr<<"Estudiantes: Ingmar Ariza, Nicoll Crespo, Nilson Perez, Juan Hernandez"<<endl;
+	
+	getchar();
+}
+
+int main() // sección  principal 
+{
+system ("color E5"); // cambia el color de la interfaz
+system("cls"); // limpia la pantalla
+cout <<" Juego de las torre de Hanoi\n"<<endl<<endl;
+cout <<" Con cuantos discos quiere jugar?:  ";
+cin >>discos; // guarda el numero d discos que el usuario digitó.
+cout <<" Con cuantas torres quiere jugar?:  ";
+cin >>torres; // guarda el numero de torres que el usuario digitó.
+
+switch (torres){ // de acuerdo al numero de torres elegidas entra a uno de los casos 
+
+ case 3:
+ 
+  while(discos>9 || discos <3) // verifica que halla elegido minimo 3 discos y maximo 9
+    { 
+    system("cls");
+    cout <<"Puede jugar minimo con 3 discos y maximo 9"<<endl<<"Con cuantos discos quiere jugar?: ";
+    cin >>discos;
+	} 	
+	tam=discos+(discos-1); // llena la interfaz que ve el usuario
+	for(i=1; i<=((tam*3)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<3; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*3)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else
+		cout <<fondo; //llena la disposicion para las torres que se usaran 
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*3)+4); i++)
+	cout <<fondo;
+	moverdisco(); // llama a la funcion que permitira mover los discos
+	
+ break;
+
+ case 4:
+
+while(discos>9 || discos <3)
+    { 
+    system("cls");
+    cout <<"Puede jugar minimo con 3 discos y maximo 9"<<endl<<"Con cuantos discos quiere jugar?: ";
+    cin >>discos;
+	} 	
+	tam=discos+(discos-1);
+	for(i=1; i<=((tam*4)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<4; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*4)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else
+		cout <<fondo;
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*4)+4); i++)
+	cout <<fondo;
+	moverdiscocu();
+	break;
+	
+case 5:
+	while(discos>9 || discos <3)
+    { 
+    system("cls");
+    cout <<"Puede jugar minimo con 3 discos y maximo 9"<<endl<<"Con cuantos discos quiere jugar?: ";
+    cin >>discos;
+	} 	
+	tam=discos+(discos-1);
+	for(i=1; i<=((tam*5)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<5; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*5)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else if(i==(((discos*2)+discos)-5)+discos*6)
+		cout <<"T5";
+		else
+		cout <<fondo;
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*5)+4); i++)
+	cout <<fondo;
+	moverdiscoci();
+	break;
+
+case 6:
+		while(discos>9 || discos <3)
+    { 
+    system("cls");
+    cout <<"Puede jugar minimo con 3 discos y maximo 9"<<endl<<"Con cuantos discos quiere jugar?: ";
+    cin >>discos;
+	} 	
+	tam=discos+(discos-1);
+	for(i=1; i<=((tam*6)+3)+1; i++)
+	      cout <<fondo;
+	cout <<endl<<fondo;
+	for(i=0; i<discos; i++)
+	{
+		for(j=0; j<6; j++)
+		{
+			if(j==0)
+		     	matriz [i][j]=i+1;
+			else
+		     	matriz [i][j]=0;
+			for(k=1; k <=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k>(tam-espacios))
+					cout <<fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+			
+		}
+		cout <<endl<<fondo;
+	}
+	for(i=1; i<=((tam*6)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else if(i==(((discos*2)+discos)-5)+discos*6)
+		cout <<"T5";
+		else if(i==(((discos*2)+discos)-6)+discos*8)
+		cout <<"T6";
+		else
+		cout <<fondo;
+		
+		
+	}
+	cout <<endl;
+	for(i=1; i<=((tam*6)+4); i++)
+	cout <<fondo;
+	moverdiscose();
+	
+	break; 
+		
+	default:
+    system("cls");
+	cout <<"Puede jugar minimo con 3 torres y maximo 6"<<endl; 
+	system("PAUSE");
+}
+}
+
+
+void moverdisco() // funcion para mover los discos, las indicaciones colocadas aqui aplican para las demas funciones cuando se eligen 4, 5 y 6 torres
+{
+	while(matriz[0][1]!=1&& matriz[0][2]!=1) // verifica que las demas torres esten vacias, y a lo largo de la funcion se verifica que la que se llene este
+	//bien llenada si asi es termina el juego 
+	{
+		cout <<"\n\n\t\t\t Numero de movimientos realizados: "<<con++<<" \n\n"; // cuenta los movimientos realizados
+		/*if (con==(2^discos)-1)
+		cout <<"Ya alcanzo el numero minimo de movimientos" <<*/
+		do{
+			cout <<"En que torre se encuentra el disco que desea mover: ";
+			cin >> desde; // guarda en que torre se encuentra el disco que desea mover 
+			if(matriz[discos-1][desde-1]==0){ 
+			cout <<"No hay disco en esa torre" <<endl;
+			}
+			
+		}
+		while(matriz[discos-1][desde-1]==0);
+		cout <<"En que torre desea colocar el disco:  ";
+		cin >> hacia; // guarda en que torre se ubicara el disco que desea mover
+		desde--;
+		hacia--;
+		for(i=0; i<discos; i++)
+		{
+			if(matriz[i][desde]!=0)
+			{
+				tem=matriz[i][desde];
+				tem2=i;
+				i=discos;
+				
+			}
+		}
+		for(i=discos-1; i>=0; i--)
+		{
+			if(matriz[i][hacia]==0)
+			{
+				if(matriz[i+1][hacia]>tem || i == (discos-1))
+				{
+					matriz[i][hacia]=tem;
+					matriz[tem2][desde]=0;
+					
+				}
+				else
+				{
+					cout<<"\n\n Error: No puedes colocar un disco de mayor tamaño encima de uno de menor tamaño \n Ni dejar el disco en la misma torre" <<endl
+					<<"Cambie sus elecciones"<< endl; // mensaje de error para cuando se quiere colocar un disco grande encima de uno pequeño
+					con--;
+					moverdisco();
+					
+				}
+				i=0;
+			}
+		}
+		system("cls");
+		for(i=1; i<=((tam*3)+3)+1; i++)
+		    cout <<fondo;
+		cout <<endl<<fondo;
+		for(i=0; i<discos; i++)
+		{
+			for(j=0; j<3; j++)
+			{
+			
+			for(k=1; k<=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k > (tam-espacios))
+					cout << fondo;
+					else
+					cout <<"o"; // llena los espacios donde deben ir las torres sino los llena con el fondo
+				}
+			}
+			cout <<fondo;
+		}	
+		cout <<endl<<fondo;
+		
+	}
+	for(i=1; i<=((tam*3)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else 
+		cout <<fondo;
+		
+	}
+	cout<<endl;
+	for(i=1; i<=((tam*3)+4); i++)
+	cout <<fondo;
+}
+/*system("color f1");*/
+system("color 71") ; // cambia el color y le muestra con cuantos movimientos resolvio el juego, ademas de preguntar si dese seguir jugando
+cout <<"\n\n Resolvio el juego en " << con << " movimientos \n\n Desea volver a jugar: Escriba S (si) o N para (no):   ";
+cin >> si; 
+con=0;
+if(si=='s' || si=='S')
+     main();
+else
+     salir();
+getchar();
+
+}
+void moverdiscocu()
+{
+	while(matriz[0][1]!=1 && matriz[0][2]!=1 && matriz[0][3]!=1)
+	{
+		cout <<"\n\n\t\t\t Numero de movimientos realizados: "<<con++<<" \n\n";
+		do{
+			cout <<"En que torre se encuentra el disco que desea mover: ";
+			cin >> desde;
+			if(matriz[discos-1][desde-1]==0){ 
+			cout <<"No hay disco en esa torre" <<endl;
+			}
+			
+		}
+		while(matriz[discos-1][desde-1]==0);
+		cout <<"En que torre desea colocar el disco:  ";
+		cin >> hacia;
+		desde--;
+		hacia--;
+		for(i=0; i<discos; i++)
+		{
+			if(matriz[i][desde]!=0)
+			{
+				tem=matriz[i][desde];
+				tem2=i;
+				i=discos;
+				
+			}
+		}
+		for(i=discos-1; i>=0; i--)
+		{
+			if(matriz[i][hacia]==0)
+			{
+				if(matriz[i+1][hacia]>tem || i == (discos-1))
+				{
+					matriz[i][hacia]=tem;
+					matriz[tem2][desde]=0;
+					
+				}
+				else
+				{
+					cout<<"\n\n Error: No puedes colocar un disco de mayor tamaño encima de uno de menor tamaño \n Ni dejar el disco en la misma torre" <<endl
+					<<"Cambie sus elecciones"<< endl;
+					con--;
+					moverdisco();
+					
+				}
+				i=0;
+			}
+		}
+		system("cls");
+		for(i=1; i<=((tam*4)+3)+1; i++)
+		    cout <<fondo;
+		cout <<endl<<fondo;
+		for(i=0; i<discos; i++)
+		{
+			for(j=0; j<4; j++)
+			{
+			
+			for(k=1; k<=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k > (tam-espacios))
+					cout << fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+		}	
+		cout <<endl<<fondo;
+		
+	}
+	for(i=1; i<=((tam*4)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else 
+		cout <<fondo;
+		
+	}
+	cout<<endl;
+	for(i=1; i<=((tam*4)+4); i++)
+	cout <<fondo;
+}
+/*system("color f1");*/
+system("color 71") ;
+cout <<"\n\n Resolvio el juego en " << con << " movimientos \n\n Desea volver a jugar: Escriba S (si) o N para (no):   ";
+cin >> si;
+con=0;
+if(si=='s' || si=='S')
+     main();
+else
+     salir();
+getchar();
+
+}
+
+void moverdiscoci()
+{
+	while(matriz[0][1]!=1 && matriz[0][2]!=1 && matriz[0][3]!=1 && matriz[0][4]!=1 )
+	{
+		cout <<"\n\n\t\t\t Numero de movimientos realizados: "<<con++<<" \n\n";
+		do{
+			cout <<"En que torre se encuentra el disco que desea mover: ";
+			cin >> desde;
+			if(matriz[discos-1][desde-1]==0){ 
+			cout <<"No hay disco en esa torre" <<endl;
+			}
+			
+		}
+		while(matriz[discos-1][desde-1]==0);
+		cout <<"En que torre desea colocar el disco:  ";
+		cin >> hacia;
+		desde--;
+		hacia--;
+		for(i=0; i<discos; i++)
+		{
+			if(matriz[i][desde]!=0)
+			{
+				tem=matriz[i][desde];
+				tem2=i;
+				i=discos;
+				
+			}
+		}
+		for(i=discos-1; i>=0; i--)
+		{
+			if(matriz[i][hacia]==0)
+			{
+				if(matriz[i+1][hacia]>tem || i == (discos-1))
+				{
+					matriz[i][hacia]=tem;
+					matriz[tem2][desde]=0;
+					
+				}
+				else
+				{
+					cout<<"\n\n Error: No puedes colocar un disco de mayor tamaño encima de uno de menor tamaño \n Ni dejar el disco en la misma torre" <<endl
+					<<"Cambie sus elecciones"<< endl;
+					con--;
+					moverdisco();
+					
+				}
+				i=0;
+			}
+		}
+		system("cls");
+		for(i=1; i<=((tam*5)+3)+1; i++)
+		    cout <<fondo;
+		cout <<endl<<fondo;
+		for(i=0; i<discos; i++)
+		{
+			for(j=0; j<5; j++)
+			{
+			
+			for(k=1; k<=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k > (tam-espacios))
+					cout << fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+		}	
+		cout <<endl<<fondo;
+		
+	}
+	for(i=1; i<=((tam*5)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else if(i==(((discos*2)+discos)-5)+discos*6)
+		cout <<"T5";
+		else 
+		cout <<fondo;
+		
+	}
+	cout<<endl;
+	for(i=1; i<=((tam*5)+4); i++)
+	cout <<fondo;
+}
+/*system("color f1");*/
+system("color 71") ;
+cout <<"\n\n Resolvio el juego en " << con << " movimientos \n\n Desea volver a jugar: Escriba S (si) o N para (no):   ";
+cin >> si;
+con=0;
+if(si=='s' || si=='S')
+     main();
+else
+     salir();
+getchar();
+
+}
+
+void moverdiscose()
+{
+	while(matriz[0][1]!=1 && matriz[0][2]!=1 && matriz[0][3]!=1 && matriz[0][4]!=1 && matriz[0][5]!=1)
+	{
+		cout <<"\n\n\t\t\t Numero de movimientos realizados: "<<con++<<" \n\n";
+		do{
+			cout <<"En que torre se encuentra el disco que desea mover: ";
+			cin >> desde;
+			if(matriz[discos-1][desde-1]==0){ 
+			cout <<"No hay disco en esa torre" <<endl;
+			}
+			
+		}
+		while(matriz[discos-1][desde-1]==0);
+		cout <<"En que torre desea colocar el disco:  ";
+		cin >> hacia;
+		desde--;
+		hacia--;
+		for(i=0; i<discos; i++)
+		{
+			if(matriz[i][desde]!=0)
+			{
+				tem=matriz[i][desde];
+				tem2=i;
+				i=discos;
+				
+			}
+		}
+		for(i=discos-1; i>=0; i--)
+		{
+			if(matriz[i][hacia]==0)
+			{
+				if(matriz[i+1][hacia]>tem || i == (discos-1))
+				{
+					matriz[i][hacia]=tem;
+					matriz[tem2][desde]=0;
+					
+				}
+				else
+				{
+					cout<<"\n\n Error: No puedes colocar un disco de mayor tamaño encima de uno de menor tamaño \n Ni dejar el disco en la misma torre" <<endl
+					<<"Cambie sus elecciones"<< endl;
+					con--;
+					moverdisco();
+					
+				}
+				i=0;
+			}
+		}
+		system("cls");
+		for(i=1; i<=((tam*6)+3)+1; i++)
+		    cout <<fondo;
+		cout <<endl<<fondo;
+		for(i=0; i<discos; i++)
+		{
+			for(j=0; j<6; j++)
+			{
+			
+			for(k=1; k<=tam; k++)
+			{
+				tamdisco=matriz[i][j]+(matriz[i][j]-1);
+				espacios=(tam-tamdisco)/2;
+				if(matriz[i][j]==0)
+				cout <<fondo;
+				else
+				{
+					if(k<=espacios || k > (tam-espacios))
+					cout << fondo;
+					else
+					cout <<"o";
+				}
+			}
+			cout <<fondo;
+		}	
+		cout <<endl<<fondo;
+		
+	}
+	for(i=1; i<=((tam*6)); i++)
+	{
+		if(i==discos-1)
+		cout <<"T1";
+		else if(i==((discos*2)+discos)-2)
+		cout <<"T2";
+		else if(i==(((discos*2)+discos)-3)+discos*2)
+		cout <<"T3";
+		else if(i==(((discos*2)+discos)-4)+discos*4)
+		cout <<"T4";
+		else if(i==(((discos*2)+discos)-5)+discos*6)
+		cout <<"T5";
+		else if(i==(((discos*2)+discos)-6)+discos*8)
+		cout <<"T6";
+		else 
+		cout <<fondo;
+		
+	}
+	cout<<endl;
+	for(i=1; i<=((tam*6)+4); i++)
+	cout <<fondo;
+}
+/*system("color f1");*/
+system("color 71") ;
+cout <<"\n\n Resolvio el juego en " << con << " movimientos \n\n Desea volver a jugar: Escriba S (si) o N para (no):   ";
+cin >> si;
+con=0;
+if(si=='s' || si=='S')
+     main();
+else
+     salir();
+getchar();
+
+}
